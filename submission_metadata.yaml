@@ -1,0 +1,50 @@
+team_name: "HireMind AI Team"
+
+primary_contact:
+  name: "rmk spandanaa"
+  email: "spandanaa@example.com"
+  phone: "+91-9999999999"
+
+team_members:
+  - name: "rmk spandanaa"
+    email: "spandanaa@example.com"
+    role: "ML Engineer"
+
+github_repo: "https://github.com/spandanaa/HireMind-AI"
+sandbox_link: "https://huggingface.co/spaces/spandanaa/redrob-ranker"
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+compute:
+  platform: "Local PC"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.11.25"
+  os: "Windows 11"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: true
+  pre_computation_time_minutes: 2
+
+ai_tools_used:
+  - "Claude"
+  - "Cursor"
+
+ai_usage_summary: |
+  Used Claude for architectural design, debugging python issues, and designing the offline sentence-embedding pipeline.
+  No candidate data was shared with hosted LLMs.
+
+methodology_summary: |
+  Rule-based ranker with coarse pre-filtering and exact word matching. Evaluates candidates using an ensemble:
+  - Semantic Cosine Similarity: locally computed against the founding team JD using pre-downloaded all-MiniLM-L6-v2.
+  - Target Experience Match: peaking at 6-8 years with appropriate decay parameters.
+  - Structured Title Relevance: matches engineering titles, penalizing non-technical title keyword stuffers.
+  - Consulting Lifers Exclusion: penalizes profiles with histories entirely within consulting services.
+  - Multiplicative Behavioral Modifiers: integrates profile completeness, active status, response rate, notice period, and relocation willingness.
+  - 100% Honeypot Exclusion: multi-pass check to disqualify anomalous profiles (active date prior to signup, impossible tenures, skills-durations mismatch).
+
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
